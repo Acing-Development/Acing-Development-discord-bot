@@ -1,5 +1,3 @@
-const secret = require("./secret.js");
-
 const Discord = require("discord.js");
 const client = new Discord.Client();
 
@@ -21,4 +19,4 @@ client.on("ready", function() {
   console.log("Logged in as " + client.user.tag + "!");
 });
 
-client.login(secret.DISCORD_TOKEN);
+client.login(process.env.DISCORD_TOKEN);
