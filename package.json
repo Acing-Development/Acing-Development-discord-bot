@@ -19,7 +19,6 @@
   "homepage": "https://github.com/Acing-Development/Acing-Development-discord-bot#readme",
   "dependencies": {
     "discord.js": "^12.5.1",
-    "events": "^3.3.0",
     "express": "^4.17.1"
   }
 }
