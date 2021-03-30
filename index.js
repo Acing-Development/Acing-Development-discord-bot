@@ -8,20 +8,32 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
+global.main_json = require("./main.json");
+
 const prefix = "$";
 
-const commandFiles = fs.readdirSync("./commands").filter(function(file) {
+for (const file of fs.readdirSync("./commands").filter(function(file) {
   return file.endsWith(".js");
-});
-for (const file of commandFiles) {
+})) {
 	const command = require("./commands/" + file);
 	client.commands.set(command.name, command);
+}
+
+let modules = [];
+
+const moduleFiles = fs.readdirSync("./modules").filter(function(file) {
+  return file.endsWith(".js") && file != "template.js";
+});
+for (const file of moduleFiles) {
+	modules.push(require("./modules/" + file));
 }
 
 client.on("message", function(message) {
   if (message.author.bot) return; // Sender was a bot
 
-  // Global
+  for (const mod of modules) {
+    mod.emit("message", message);
+  }
 
   if (message.content.startsWith(prefix)) {
     // Command
@@ -33,9 +45,10 @@ client.on("message", function(message) {
       try {
         client.commands.get(cmd).execute(client, cmd, args, message.channel, message.author, message);
       } catch (error) {
-        console.error(error);
-        message.reply("there was an error trying to execute that command!");
+        message.channel.send("Oh no! Something went wrong!");
       }
+    } else {
+      message.channel.send("Sorry, but that command doesn't exist.");
     }
   } else {
     // Text
@@ -45,19 +58,22 @@ client.on("message", function(message) {
 client.on("ready", function() {
   console.log("Logged in as " + client.user.tag + "!");
 
+  for (const mod of modules) {
+    mod.emit("ready");
+  }
+
   let activities = ["Lucade Realm", "Roblox", "Infinite Obby"];
   Utils.setIntervalImmediately(function() {
     let activity = activities[Math.floor(Math.random() * activities.length)];
     console.log("Changed activity: " + activity);
     client.user.setActivity(activity);
-    
   }, 120000); // Fires every 120 seconds = every 2 minutes
 });
 
 client.login(process.env.DISCORD_TOKEN);
 
-expressApp.get('/', (req, res) => {
-  res.send('Hello World!')
+expressApp.get("/", (req, res) => {
+  res.send("Ping!");
 })
 
 expressApp.listen(8000, async () => {
