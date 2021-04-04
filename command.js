@@ -1,22 +1,39 @@
-const config = require("./config.json");
+async function executorWrapper(command, message, args) {
+  for (const permission of command.permissions_required) {
+    if (!message.member.hasPermission(permission)) {
+      message.reply("You do not have permission to use this command.");
+      return;
+    }
+  }
 
-module.exports = function(client, aliases, callback) {
-  // Ensure aliases variable is an array
-  if (typeof aliases === "string") aliases = [aliases];
+  for (const role of command.roles_required) {
+    if (!message.member.roles.cache.find(function(r) {
+      return r.name == role;
+    })) {
+      message.reply("You do not have the required role(s) to use this command.");
+      return;
+    }
+  }
 
-  client.on("message", function(message) {
-    if (!message.content.startsWith(config.prefix)) return;
+  if (args.length < command.minArgs) {
+    message.reply("This command does not have enough arguments.");
+    return;
+  } else if (args.length > command.maxArgs && command.maxArgs != -1) {
+    message.reply("This command does has too many arguments.");
+    return;
+  }
 
-    const contentSplit = message.content.slice(config.prefix.length).split(" ");
+  await command.executor(message, args);
+}
 
-    let command = contentSplit[0].toLowerCase();
-    let args = contentSplit.slice(1);
+module.exports = function(overwrittenData) {
+  let data = Object.assign({}, require("./templates/command.js"));
 
-    aliases.forEach(function(alias) {
-      if (command == alias) {
-        console.log("Running the command " + command);
-        callback(message);
-      }
-    });
-  });
+  for (let key in overwrittenData) {
+    data[key] = overwrittenData[key];
+  }
+
+  data.execute = executorWrapper;
+
+  return data;
 }
