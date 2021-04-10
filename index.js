@@ -24,7 +24,19 @@ walkDir("./commands", function(file) {
 
 const config = require("./config.json");
 
+const autoMod = require("./modules/automod.js");
+const readmeMessages = require("./modules/readme-messages.js");
+const poll = require("./modules/poll.js");
+const punishments = require("./modules/punishments.js");
+
 global.client.on("message", async function(message) {
+  if (message.author.bot) return;
+
+  if (await autoMod(message)) {
+    message.delete();
+    return;
+  }
+
   if (!message.content.startsWith(config.prefix)) return;
 
   const contentSplit = message.content.slice(config.prefix.length).split(" ");
@@ -39,10 +51,6 @@ global.client.on("message", async function(message) {
     }
   }
 });
-
-const readmeMessages = require("./modules/readme-messages.js");
-const poll = require("./modules/poll.js");
-const finishPunishments = require("./modules/finishPunishments.js");
 
 global.client.on("ready", async function() {
   console.log("Logged in as " + global.client.user.tag + "!");
@@ -60,7 +68,7 @@ global.client.on("ready", async function() {
 
   readmeMessages();
   poll();
-  finishPunishments();
+  punishments();
 });
 
 client.login(process.env.DISCORD_TOKEN);

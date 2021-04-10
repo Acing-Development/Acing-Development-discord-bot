@@ -19,7 +19,7 @@ async function executorWrapper(command, message, args) {
     message.reply("This command does not have enough arguments.");
     return;
   } else if (args.length > command.maxArgs && command.maxArgs != -1) {
-    message.reply("This command does has too many arguments.");
+    message.reply("This command has too many arguments.");
     return;
   }
 
