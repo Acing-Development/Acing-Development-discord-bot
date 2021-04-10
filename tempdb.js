@@ -6,9 +6,26 @@ class TempDBClient {
     this.connectionCount = 0;
   }
 
+  setPath(path) {
+    this.path = path;
+  }
+
+  removeGarbage() {
+    if (!this.connection) console.log("No connection has been made yet and therefor couldn't execute a removeGarbage() function.");
+
+    const now = Date.now() / 1000;
+
+    for (const [key, value] of Object.entries(this.connection)) {
+      if (value.expireTime < now) {
+        delete this.connection[key];
+      }
+    }
+  }
+
   connect() {
     if (this.connectionCount == 0) {
       this.connection = require(this.path);
+      removeGarbage();
     }
 
     this.connectionCount += 1;
