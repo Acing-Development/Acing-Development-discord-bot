@@ -16,7 +16,7 @@ class TempDBClient {
     const now = Date.now() / 1000;
 
     for (const [key, value] of Object.entries(this.connection)) {
-      if (value.expireTime < now) {
+      if (value.expireTime < now && value.expireTime != null) {
         delete this.connection[key];
       }
     }
@@ -25,7 +25,7 @@ class TempDBClient {
   connect() {
     if (this.connectionCount == 0) {
       this.connection = require(this.path);
-      removeGarbage();
+      this.removeGarbage();
     }
 
     this.connectionCount += 1;

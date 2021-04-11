@@ -5,7 +5,7 @@ async function containsAdvertisement(text) {
 }
 
 async function containsSwearwords(text) {
-  return await fetch("https://raw.githubusercontent.com/AceKiron/swearwords/main/swearwords.txt").then(res => res.text()).then(function(resText) {
+  return await fetch("https://raw.githubusercontent.com/AceKiron/public_data/main/swearwords.txt").then(res => res.text()).then(function(resText) {
     const swearwords = resText.split("\n");
 
     for (const swearword of swearwords) {

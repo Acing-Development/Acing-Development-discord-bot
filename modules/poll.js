@@ -16,7 +16,7 @@ const addReactions = function(message) {
 
 module.exports = function() {
   const channelIds = [
-    "826786843306885120" // #test
+    "830767810883354634" // #suggestions
   ];
 
   global.client.on("message", function(message) {

@@ -8,7 +8,10 @@ module.exports = function(channelId, messageId) {
   }
 
   const emojis = {
-    javascript: "JavaScript"
+    programmer: "Programmer",
+    translator: "Translator",
+    game_designer: "Game Designer",
+    beta_tester: "Beta Tester"
   }
 
   const reactions = [];
@@ -18,7 +21,7 @@ module.exports = function(channelId, messageId) {
     reactions.push(emoji);
 
     const role = emojis[emojiName];
-    emojiText += `${emoji}: ${role}`;
+    emojiText += `${emoji}: ${role}\n\n`;
   }
 
   botMessage(channelId, messageId, emojiText, reactions);

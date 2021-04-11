@@ -47,7 +47,7 @@ global.client.on("message", async function(message) {
   for (const command of global.client.commands) {
     if (command.aliases.includes(cmd)) {
       await command.execute(command, message, args);
-      break;
+      return;
     }
   }
 });
