@@ -6,21 +6,12 @@ const Discord = require("discord.js");
 global.client = new Discord.Client();
 global.client.commands = [];
 
-function walkDir(dir, callback) {
-  fs.readdirSync(dir).forEach( f => {
-    let dirPath = path.join(dir, f);
-    let isDirectory = fs.statSync(dirPath).isDirectory();
-    isDirectory ? 
-      walkDir(dirPath, callback) : callback(path.join(dir, f));
+fs.readdirSync("./commands").forEach(function(category) {
+  fs.readdirSync("./commands/" + category).forEach(function(file) {
+    const command = require("./commands/" + category + "/" + file)();
+    global.client.commands.push([category, command]);
   });
-};
-
-walkDir("./commands", function(file) {
-  if (file.endsWith(".js")) {
-    const command = require("./" + file)();
-    global.client.commands.push(command);
-  }
-})
+});
 
 const config = require("./config.json");
 
@@ -44,7 +35,9 @@ global.client.on("message", async function(message) {
   let cmd = contentSplit[0].toLowerCase();
   let args = contentSplit.slice(1);
 
-  for (const command of global.client.commands) {
+  for (const commandArr of global.client.commands) {
+    const command = commandArr[1];
+    
     if (command.aliases.includes(cmd)) {
       await command.execute(command, message, args);
       return;
@@ -69,6 +62,8 @@ global.client.on("ready", async function() {
   readmeMessages();
   poll();
   punishments();
+
+  global.client.guilds.resolve("825743723681939466").channels.resolve("830885460564770906").send("I'm back online!");
 });
 
 client.login(process.env.DISCORD_TOKEN);
