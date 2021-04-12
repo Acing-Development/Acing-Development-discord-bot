@@ -16,6 +16,8 @@ const embed = require("../../modules/embed.js");
 module.exports = function() {
   return require("../../command.js")({
     aliases: ["axolotl", "lotl"],
+    minArgs: 0,
+    maxArgs: 0,
     executor: async function(message, args) {
       message.reply(embed({
         title: "A cute axolotl picture for " + message.member.displayName,

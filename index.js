@@ -1,19 +1,26 @@
 const fs = require("fs");
 const path = require('path');
 
+const config = require("./config.json");
+
 const Discord = require("discord.js");
 
 global.client = new Discord.Client();
 global.client.commands = [];
+global.client.categories = [];
 
 fs.readdirSync("./commands").forEach(function(category) {
+  const commandNames = [];
+
   fs.readdirSync("./commands/" + category).forEach(function(file) {
+    commandNames.push(config.prefix + file.replace(".js", ""));
+
     const command = require("./commands/" + category + "/" + file)();
     global.client.commands.push([category, command]);
   });
-});
 
-const config = require("./config.json");
+  global.client.categories.push([category, commandNames]);
+});
 
 const autoMod = require("./modules/automod.js");
 const readmeMessages = require("./modules/readme-messages.js");
