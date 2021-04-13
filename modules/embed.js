@@ -16,11 +16,13 @@ module.exports = function(overwrittenData) {
     embed.setImage(data.image);
   }
 
-  embed.setTimestamp()
+  embed.setTimestamp();
 
   for (const field of data.fields) {
     embed.addField(field[0], field[1]);
   }
+
+  embed.setFooter(data.footer);
 
   return embed;
 }

@@ -1,15 +1,19 @@
 const embed = require("../../modules/embed.js");
 
+const config = require("../../config.json");
+
 module.exports = function() {
   return require("../../command.js")({
     aliases: ["help", "?", "cmds"],
     minArgs: 0,
-    maxArgs: 0,
+    maxArgs: 1,
     executor: async function(message, args) {
-      // 0 args = $help, show all categories
+      let data;
+
       if (args.length == 0) {
-        let data = {
-          title: "Help | All categories",
+        // 0 args = $help, show all categories
+        data = {
+          title: "Help | All commands",
           color: "#6995db",
           fields: []
         };
@@ -17,9 +21,25 @@ module.exports = function() {
         for (const category of global.client.categories) {
           data.fields.push([category[0], "`" + category[1].join("`, `") + "`"]);
         }
+      } else {
+        // 1 arg = $help [alias], show information about command
+        data = {
+          title: "Help | " + config.prefix + args[0],
+          color: "#6995db"
+        };
 
-        message.reply(embed(data));
+        for (const command of global.client.commands) {
+          if (command.aliases.includes(args[0])) {
+            data.fields = [
+              ["Description", command.description],
+              ["Aliases", "`" + command.aliases.join("`, `") + "`"],
+              ["Argument range:", command.minArgs + ", " + command.maxArgs]
+            ]
+          }
+        }
       }
+
+      message.reply(embed(data));
     }
   });
 }

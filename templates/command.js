@@ -1,6 +1,6 @@
 module.exports = {
   aliases: [],
-  description: "",
+  description: "No description was provided.",
   minArgs: 0,
   maxArgs: -1,
   permissions_required: [],

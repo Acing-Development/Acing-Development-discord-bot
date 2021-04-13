@@ -1,9 +1,16 @@
 const fetch = require("node-fetch");
 
 let images;
+let footer;
+
+function getPercentageChance(images) {
+  const freq = 1 / images.length;
+  return Math.ceil(freq * 1000) / 10;
+}
 
 fetch("https://raw.githubusercontent.com/AceKiron/public_data/main/axolotl_pictures.txt").then(res => res.text()).then(function(resText) {
-  images = resText.split("\n");
+  images = resText.trim().split("\n");
+  footer = "This specific image had a " + getPercentageChance(images) + "% of being selected.";
 });
 
 function getRandomInt(min, max) {
@@ -22,7 +29,8 @@ module.exports = function() {
       message.reply(embed({
         title: "A cute axolotl picture for " + message.member.displayName,
         color: color.hslToHex(325, getRandomInt(60, 100), getRandomInt(65, 95)),
-        image: images[getRandomInt(0, images.length - 1)]
+        image: images[getRandomInt(0, images.length - 1)],
+        footer: footer
       }));
     }
   });

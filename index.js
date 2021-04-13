@@ -16,16 +16,13 @@ fs.readdirSync("./commands").forEach(function(category) {
     commandNames.push(config.prefix + file.replace(".js", ""));
 
     const command = require("./commands/" + category + "/" + file)();
-    global.client.commands.push([category, command]);
+    global.client.commands.push(command);
   });
 
   global.client.categories.push([category, commandNames]);
 });
 
 const autoMod = require("./modules/automod.js");
-const readmeMessages = require("./modules/readme-messages.js");
-const poll = require("./modules/poll.js");
-const punishments = require("./modules/punishments.js");
 
 global.client.on("message", async function(message) {
   if (message.author.bot) return;
@@ -42,9 +39,7 @@ global.client.on("message", async function(message) {
   let cmd = contentSplit[0].toLowerCase();
   let args = contentSplit.slice(1);
 
-  for (const commandArr of global.client.commands) {
-    const command = commandArr[1];
-    
+  for (const command of global.client.commands) {
     if (command.aliases.includes(cmd)) {
       await command.execute(command, message, args);
       return;
@@ -55,25 +50,16 @@ global.client.on("message", async function(message) {
 global.client.on("ready", async function() {
   console.log("Logged in as " + global.client.user.tag + "!");
 
-  function changeActivity() {
-    let activities = ["Lucade Realm", "Roblox", "Infinite Obby"];
-    let activity = activities[Math.floor(Math.random() * activities.length)];
-    global.client.user.setActivity(activity);
-    console.log("Changed activity: " + activity);
-  }
-
-  // Fires every 120 seconds = every 2 minutes
-  setInterval(changeActivity, 120000);
-  changeActivity();
-
-  readmeMessages();
-  poll();
-  punishments();
+  require("./modules/readme.js")();
+  require("./modules/poll.js")();
+  require("./modules/punishments.js")();
+  require("./modules/nitro_boost.js")();
+  require("./modules/activities.js")();
 
   global.client.guilds.resolve("825743723681939466").channels.resolve("830885460564770906").send("I'm back online!");
 });
 
-client.login(process.env.DISCORD_TOKEN);
+global.client.login(process.env.DISCORD_TOKEN);
 
 const expressApp = require("express")();
 
