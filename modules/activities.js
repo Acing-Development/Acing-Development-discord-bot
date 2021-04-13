@@ -1,5 +1,12 @@
+const activities = [
+  "Lucade Realm",
+  "Roblox",
+  "Infinite Obby",
+  "with axolotls",
+  "some game"
+];
+
 function changeActivity() {
-    let activities = ["Lucade Realm", "Roblox", "Infinite Obby"];
     let activity = activities[Math.floor(Math.random() * activities.length)];
     global.client.user.setActivity(activity);
     console.log("Changed activity: " + activity);
