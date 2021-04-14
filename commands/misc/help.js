@@ -23,6 +23,8 @@ module.exports = function() {
           data.fields.push([category[0], "`" + category[1].join("`, `") + "`"]);
         }
       } else {
+        const cmdName = args[0].toLowerCase();
+
         // 1 arg = $help [alias], show information about command
         data = {
           title: "Help | " + config.prefix + args[0],
@@ -30,13 +32,19 @@ module.exports = function() {
         };
 
         for (const command of global.client.commands) {
-          if (command.aliases.includes(args[0])) {
+          if (command.aliases.includes(cmdName)) {
             data.fields = [
               ["Description", command.description],
               ["Aliases", "`" + command.aliases.join("`, `") + "`"],
               ["Argument range:", command.minArgs + ", " + command.maxArgs]
             ]
           }
+        }
+
+        if (!data.fields) {
+          data.fields = [
+            ["Error", "There's no such command."]
+          ];
         }
       }
 
