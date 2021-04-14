@@ -5,6 +5,7 @@ const config = require("../../config.json");
 module.exports = function() {
   return require("../../command.js")({
     aliases: ["help", "?", "cmds"],
+    description: "Shows a list of all commands.",
     minArgs: 0,
     maxArgs: 1,
     executor: async function(message, args) {

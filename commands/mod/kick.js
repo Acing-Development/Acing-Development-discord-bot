@@ -1,7 +1,8 @@
 module.exports = function() {
   return require("../../command.js")({
     aliases: ["kick"],
-    permissions_required: ["KICK_MEMBER"],
+    description: "Kicks a member.",
+    roles_required: ["Admin"],
     minArgs: 1,
     maxArgs: 1,
     executor: async function(message, args) {

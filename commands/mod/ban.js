@@ -1,7 +1,8 @@
 module.exports = function() {
   return require("../../command.js")({
     aliases: ["ban"],
-    permissions_required: ["BAN_MEMBER"],
+    description: "Bans a member.",
+    roles_required: ["Admin"],
     minArgs: 1,
     maxArgs: 1,
     executor: async function(message, args) {

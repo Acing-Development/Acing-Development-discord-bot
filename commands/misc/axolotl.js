@@ -23,6 +23,7 @@ const embed = require("../../modules/embed.js");
 module.exports = function() {
   return require("../../command.js")({
     aliases: ["axolotl", "lotl"],
+    description: "Shows you a cute picture of an axolotl.",
     minArgs: 0,
     maxArgs: 0,
     executor: async function(message, args) {

@@ -36,6 +36,7 @@ function mute(target, time) {
 module.exports = function() {
   return require("../../command.js")({
     aliases: ["mute"],
+    description: "Mutes a member",
     roles_required: ["Admin"],
     minArgs: 2,
     maxArgs: 2,
