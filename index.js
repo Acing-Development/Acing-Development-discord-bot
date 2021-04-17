@@ -52,9 +52,10 @@ global.client.on("ready", async function() {
 
   require("./modules/readme.js")();
   require("./modules/poll.js")();
-  require("./modules/punishments.js")();
   require("./modules/nitro_boost.js")();
   require("./modules/activities.js")();
+
+  require("./modules/punishments.js").ready();
 
   global.client.guilds.resolve("825743723681939466").channels.resolve("830885460564770906").send("I'm back online!");
 });

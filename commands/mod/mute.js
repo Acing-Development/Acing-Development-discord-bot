@@ -1,5 +1,6 @@
 const muteRoleId = "826895434281910273";
 
+const punishments = require("../../modules/punishments.js");
 const tempdb = require("../../tempdb.js");
 
 function convertDurationToSeconds(duration) {
@@ -39,14 +40,17 @@ module.exports = function() {
     description: "Mutes a member",
     roles_required: ["Admin"],
     minArgs: 2,
-    maxArgs: 2,
     executor: async function(message, args) {
       const target = await getUserFromMention(message.guild, args[0]);
       const time = convertDurationToSeconds(args[1]);
+      const reason = args.slice(2).join(" ");
 
       if (time != NaN) {
         if (target) {
           mute(target, time);
+          punishments.punish(message, target, "Mute", reason, [
+            ["Time", args[1]]
+          ]);
         }
       } else {
         message.reply("Please specify a valid time using the HH:MM:SS format.");
