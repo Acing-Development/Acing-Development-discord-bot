@@ -9,7 +9,7 @@ module.exports = function(channelId, messageId) {
 
 **Rule 4:** Spamming in any channel is not allowed, these includes pings without context.
 
-**Rule 5:** No advertising outside of advertisements channel.
+**Rule 5:** No advertising.
 
 **Rule 6:** Don't try getting around the filter, it's there for a reason.
 

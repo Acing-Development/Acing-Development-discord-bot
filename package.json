@@ -23,6 +23,7 @@
     "mongodb": "^3.6.5",
     "mongoose": "^5.12.2",
     "node-fetch": "^2.6.1",
-    "redis": "^3.0.2"
+    "redis": "^3.0.2",
+    "tempdb.js": "^1.0.3"
   }
 }

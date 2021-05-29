@@ -2,16 +2,24 @@ const botMessage = require("../bot-message.js");
 
 module.exports = function(channelId, messageId) {
   const getEmoji = function(emojiName) {
-    return global.client.emojis.cache.find(function(emoji) {
+    let emoji = global.client.emojis.cache.find(function(emoji) {
       return emoji.name == emojiName;
     });
+
+    if (emoji) return emoji;
+
+    return emojiName;
   }
 
   const emojis = {
-    programmer: "Programmer",
-    translator: "Translator",
-    game_designer: "Game Designer",
-    beta_tester: "Beta Tester"
+    "🖥️": "Programmer",
+    "📜": "Translator",
+    "🎵": "Music Composer",
+    "🎮": "Beta Tester",
+    "🖌️": "Artist",
+    "🏃": "Animator",
+    "💬": "Story Writer",
+    "🎲": "Game Designer"
   }
 
   const reactions = [];
@@ -32,9 +40,7 @@ module.exports = function(channelId, messageId) {
     const emoji = reaction._emoji.name;
     const roleName = emojis[emoji];
 
-    if (!roleName) return;
-
-    const role  = reaction.message.guild.roles.cache.find(function(role) {
+    const role = reaction.message.guild.roles.cache.find(function(role) {
       return role.name == roleName;
     });
     const member = reaction.message.guild.members.cache.find(function(member) {

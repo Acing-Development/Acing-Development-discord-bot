@@ -28,6 +28,7 @@ global.client.on("message", async function(message) {
   if (message.author.bot) return;
 
   if (await autoMod(message)) {
+    console.log("Automod detected rulebreaking message by " + message.author.id + ": " + message.content);
     message.delete();
     return;
   }
@@ -54,8 +55,7 @@ global.client.on("ready", async function() {
   require("./modules/poll.js")();
   require("./modules/nitro_boost.js")();
   require("./modules/activities.js")();
-
-  require("./modules/punishments.js").ready();
+  require("./modules/auto-publish.js")();
 
   global.client.guilds.resolve("825743723681939466").channels.resolve("830885460564770906").send("I'm back online!");
 });

@@ -14,10 +14,16 @@ const addReactions = function(message, reactions) {
 
 module.exports = async function(channelId, messageId, text, reactions = []) {
   const channel = await global.client.channels.fetch(channelId);
-  channel.messages.fetch(messageId).then(function(message) {
+
+  let message = await channel.messages.fetch(messageId);
+
+  if (message) {
     message.edit(text);
-    if (reactions.length > 0) {
-      addReactions(message, reactions);
-    }
-  });
+  } else {
+    message = await channel.send(text);
+  }
+
+  if (reactions.length > 0) {
+    addReactions(message, reactions);
+  }
 }
