@@ -17,5 +17,5 @@ module.exports = function(channelId, messageId) {
 
 **Rule 8:** Follow Discord's Terms of Service.
 
-**Rule 9:** Only DM or pings mods for serious reasons.`);
+**Rule 9:** Only DM or ping mods for serious reasons.`);
 }

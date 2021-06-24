@@ -16,7 +16,9 @@ const addReactions = function(message) {
 
 module.exports = function() {
   const channelIds = [
-    "830767810883354634" // #suggestions
+    "830767810883354634", // #suggestions,
+    "845348855813374063", // #xon-suggestions: Xondalf
+    "834787561616310272", // #lr-suggestions: Lucade Realm
   ];
 
   global.client.on("message", function(message) {

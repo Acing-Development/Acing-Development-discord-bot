@@ -6,6 +6,7 @@ const config = require("./config.json");
 const Discord = require("discord.js");
 
 global.client = new Discord.Client();
+
 global.client.commands = [];
 global.client.categories = [];
 
@@ -55,12 +56,15 @@ global.client.on("ready", async function() {
   require("./modules/poll.js")();
   require("./modules/nitro_boost.js")();
   require("./modules/activities.js")();
+  require("./modules/music.js")();
   require("./modules/auto-publish.js")();
 
   global.client.guilds.resolve("825743723681939466").channels.resolve("830885460564770906").send("I'm back online!");
 });
 
 global.client.login(process.env.DISCORD_TOKEN);
+
+/////////////
 
 const expressApp = require("express")();
 

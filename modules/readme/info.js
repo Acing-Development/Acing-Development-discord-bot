@@ -9,6 +9,7 @@ For the YouTuber role you need:
 - A YouTube channel
 - A video containing this Discord server, it must also have at least 150 views.
 - At least 50 subscribers.
+If you meet these requirements, ping AceKiron asking to get the role added.
 
 For the Partner role you need:
 - This hasn't been specified yet.`);
