@@ -12,5 +12,7 @@ For the YouTuber role you need:
 If you meet these requirements, ping AceKiron asking to get the role added.
 
 For the Partner role you need:
-- This hasn't been specified yet.`);
+- Be moderator in a fellow game development Discord server.
+- Have at least 100 members in your server.
+- Be active in the community.`);
 }

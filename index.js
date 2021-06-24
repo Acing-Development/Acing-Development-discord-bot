@@ -25,10 +25,24 @@ fs.readdirSync("./commands").forEach(function(category) {
 
 const autoMod = require("./modules/automod.js");
 
+global.client.on("messageDelete", async function(message) {
+  if (message.author.bot) return;
+
+  await Discord.Util.delayFor(2500);
+
+  let logs = await message.guild.fetchAuditLogs({type: 72});
+  let entry = logs.entries.first();
+
+  if (await autoMod.onMessageDelete(entry.executor, message)) {
+    console.log("Automod detected rulebreaking message by " + message.author.id + ": " + message.content);
+    return;
+  }
+});
+
 global.client.on("message", async function(message) {
   if (message.author.bot) return;
 
-  if (await autoMod(message)) {
+  if (await autoMod.onMessage(message)) {
     console.log("Automod detected rulebreaking message by " + message.author.id + ": " + message.content);
     message.delete();
     return;
@@ -58,6 +72,7 @@ global.client.on("ready", async function() {
   require("./modules/activities.js")();
   require("./modules/music.js")();
   require("./modules/auto-publish.js")();
+  require("./modules/qotd.js")();
 
   global.client.guilds.resolve("825743723681939466").channels.resolve("830885460564770906").send("I'm back online!");
 });
