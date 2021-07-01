@@ -7,13 +7,16 @@ const questions = [
   "What game are you working on?",
   "Do you think indie or AAA games are better?",
   "Do you prefer working solo or in a team?",
-  "The the most underrated game?",
+  "What's the most underrated game?",
   "What have you learned from developing the latest game you've made?",
-  "What platform(s) will you release your game on?"
+  "What platform(s) will you release your game on?",
+  "What motivates you to develop games?",
+  "How's your game coming along?",
+  "Is your game 2D or 3D?"
 ];
 
-function newQuestion(channel) {
-  return channel.send(questions[Math.floor(Math.random() * questions.length)]);
+async function newQuestion(channel) {
+  return await channel.send(questions[Math.floor(Math.random() * questions.length)]);
 }
 
 module.exports = async function() {
@@ -23,17 +26,29 @@ module.exports = async function() {
   let lastMessage = messages.first();
 
   if (!lastMessage) {
-    lastMessage = newQuestion(channel);
+    lastMessage = await newQuestion(channel);
   }
 
-  return;
+  let offset = 1000 * 60 * 60 * 24;
+  let margin = 1000 * 60;
+  let lastMessageTimestampWithOffset = lastMessage.createdTimestamp + offset;
+  let now = Date.now();
 
-  setTimeout(function() {
-    function func() {
-      newQuestion(channel);
+  async function firstFunc() {
+    console.log("Executed timeout QOTD function");
+
+    async function func() {
+      console.log("Executed interval QOTD function");
+      lastMessage = await newQuestion(channel);
     }
 
-    func();
-    setInterval(func, 1000 * 60 * 60 * 24);
-  }, Date.now() - lastMessage.createdTimestamp + 1000 * 60 * 60 * 24);
+    await func();
+    setInterval(func, offset);
+  }
+
+  if (now > margin + lastMessage.createdTimestamp + offset) {
+    await firstFunc();
+  } else {
+    setTimeout(firstFunc, lastMessage.createdTimestamp + offset - now);
+  }
 }
