@@ -2,7 +2,7 @@ const botMessage = require("../bot-message.js");
 
 module.exports = function(channelId, messageId) {
   botMessage(channelId, messageId, `**Permanent invite link:**
-https://discord.gg/KEd4Zn2McW
+https://discord.gg/m53mPndJF3
 
 **How to get <@&834795976107360306> and <@&834796220954181692> roles:**
 For the YouTuber role you need:
