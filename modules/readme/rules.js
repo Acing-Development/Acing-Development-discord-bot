@@ -1,7 +1,9 @@
 const botMessage = require("../bot-message.js");
 
 module.exports = function(channelId, messageId) {
-  botMessage(channelId, messageId, `**Rule 1:** Be respectful to everyone.
+  botMessage(channelId, messageId, `
+  
+**Rule 1:** Be respectful to everyone.
 
 **Rule 2:** Keep topics in their designated channels.
 
@@ -17,5 +19,7 @@ module.exports = function(channelId, messageId) {
 
 **Rule 8:** Follow Discord's Terms of Service.
 
-**Rule 9:** Only DM or ping mods for serious reasons.`);
+**Rule 9:** Only DM or ping mods for serious reasons.
+
+  `);
 }
