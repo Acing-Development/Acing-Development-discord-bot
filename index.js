@@ -70,7 +70,6 @@ global.client.on("ready", async function() {
   require("./modules/poll.js")();
   require("./modules/nitro_boost.js")();
   require("./modules/activities.js")();
-  require("./modules/music.js")();
   require("./modules/auto-publish.js")();
   require("./modules/qotd.js")();
 

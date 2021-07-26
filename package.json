@@ -18,12 +18,8 @@
   },
   "homepage": "https://github.com/Acing-Development/Acing-Development-discord-bot#readme",
   "dependencies": {
-    "@discordjs/opus": "^0.5.3",
     "discord.js": "^12.5.3",
     "express": "^4.17.1",
-    "ffmpeg-static": "^4.4.0",
-    "node-fetch": "^2.6.1",
-    "tempdb.js": "^1.0.3",
-    "ytdl-core": "^4.8.2"
+    "node-fetch": "^2.6.1"
   }
 }

@@ -8,7 +8,7 @@ replies = [
   "I don't feel like answering that a%{RandNum}th time!",
   "can't you answer this yourself?",
   "at least I%{PossibleDont} think it's%{PossibleNot}%{TrueFalse}.",
-  "is%{RandNum} the%{PossibleNot} right answer?",
+  "is%{RandNum}%{PossibleNot} the right answer?",
   "E!",
   "that is%{PossibleNot} to be answered in%{RandNum} hours.",
   "you should already know the answer is%{RandNum}.",
