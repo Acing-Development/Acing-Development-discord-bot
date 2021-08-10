@@ -6,15 +6,13 @@ const bod = require("./discord-bod");
 global.client = new bod.Client(
 	async function(client) {
 		console.log("I'm logged in!");
-	},
-	null
+	}
 );
 
 console.log("Created client.");
 
 global.client.registry
 	.registerGroups([
-		["github", "Github commands"],
 		["misc", "Misc commands"],
 		["mod", "Moderator commands"]
 	])

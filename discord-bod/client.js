@@ -1,4 +1,4 @@
-const discord = require("discord.js");
+const Discord = require("discord.js");
 const splitargs = require("splitargs");
 
 const registry = require("./registry.js");
@@ -9,7 +9,7 @@ module.exports = class {
 	constructor(onReady) {
 		const bodThis = this;
 
-		this.discord_client = new discord.Client();
+		this.discord_client = new Discord.Client();
 
 		this.discord_client.on("ready", async function() {
 			console.log("Logged in as " + this.user.tag + "!");
@@ -22,6 +22,14 @@ module.exports = class {
 			global.startTime = Math.floor(Date.now() / 1000);
 		});
 
+		this.discord_client.on("guildMemberUpdate", async function(oldM, newM) {
+			for (const feature of bodThis.registry.features) {
+				if (feature.guildOnly && !message.guild) continue;
+
+				feature.onMemberUpdate(bodThis, oldM, newM);
+			}
+		});
+
 		this.discord_client.on("messageDelete", async function(message) {
 			if (message.author.bot) return;
 
@@ -31,7 +39,7 @@ module.exports = class {
 			let entry = logs.entries.first();
 
 			for (const feature of bodThis.registry.features) {
-				if (feature.guildOnly && (!message.guild)) continue;
+				if (feature.guildOnly && !message.guild) continue;
 
 				feature.onMessageDelete(bodThis, message);
 			}
@@ -41,7 +49,7 @@ module.exports = class {
 			if (message.author.bot) return;
 
 			for (const feature of bodThis.registry.features) {
-				if (feature.guildOnly && (!message.guild)) continue;
+				if (feature.guildOnly && !message.guild) continue;
 
 				feature.onMessage(bodThis, message);
 			}

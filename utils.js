@@ -11,5 +11,9 @@ module.exports = {
 
 			reactionIndex += 1;
 		}, 750);
+	},
+
+	chance_50_50() {
+		return Math.round(Math.random()) == 1;
 	}
 }

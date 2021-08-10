@@ -13,7 +13,7 @@ module.exports = function(overriteData) {
 			clientPermissions: [],
 			userPermissions: [],
 			guildOnly: false,
-			async run(client, guildSettings, message, args) {
+			async run(client, message, args) {
 				console.log("Note: This command hasn't been implemented yet.");
 			}
 		},

@@ -8,7 +8,8 @@ module.exports = function(overriteData) {
 
 			async onMessage(client, message) {},
 			async onMessageDelete(client, message) {},
-			async onReady(client) {}
+			async onReady(client) {},
+			async onMemberUpdate(client, oldMember, newMember) {}
 		},
 		overriteData
 	);

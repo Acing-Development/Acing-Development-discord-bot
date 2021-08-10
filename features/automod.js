@@ -1,5 +1,5 @@
 const bod = require("../discord-bod");
-const utils = require("../utils.js");
+const punishments = require("../misc-modules/punishments.js");
 
 async function containsAdvertisement(text) {
 	return text.includes("discord.gg/");
@@ -15,7 +15,7 @@ module.exports = bod.Feature({
 			console.log("Automod: Contains advertisement.");
 
 			message.reply("This message has been deleted due to advertising, you've also received a warning.");
-			// punishments.punish(message, message.author, "Warn", "Advertisement");
+			punishments.punish(message, message.author, "Warn", "Advertisement");
 		}
 	},
 
@@ -25,7 +25,7 @@ module.exports = bod.Feature({
 				console.log("Automod: Ghostping.");
 
 				message.send("Ghostping by <@" + message.author.id + "> detected.");
-				// punishments.punish(message, message.author, "Warn", "Ghostpinging");
+				punishments.punish(message, message.author, "Warn", "Ghostpinging");
 			}
 		}
 	}
