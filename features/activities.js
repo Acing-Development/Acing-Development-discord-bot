@@ -1,7 +1,12 @@
 const bod = require("../discord-bod");
 
 const activities = [
-    ""
+    "GameMaker Studio 2",
+    "Unity",
+    "Godot",
+    "Unreal Engine 4",
+    "Construct",
+    "Pico 8"
 ];
 
 function changeActivity(client) {
