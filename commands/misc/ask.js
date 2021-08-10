@@ -1,7 +1,7 @@
 const bod = require("../../discord-bod");
 const utils = require("../../utils.js");
 
-replies = [
+const replies = [
     "absolutely%{PossibleNot}!",
     "perhaps%{PossibleNot}.",
     "if you%{PossibleDont} think so.",
