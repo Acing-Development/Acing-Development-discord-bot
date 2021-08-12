@@ -1,8 +1,8 @@
 const bod = require("../discord-bod");
 const utils = require("../utils.js");
 
-const getEmoji = function(emojiName) {
-	let emoji = global.client.discord_client.emojis.cache.find(function(emoji) {
+const getEmoji = function(client, emojiName) {
+	let emoji = client.discord_client.emojis.cache.find(function(emoji) {
 		return emoji.name == emojiName;
 	});
 
@@ -11,8 +11,8 @@ const getEmoji = function(emojiName) {
 	return emojiName;
 }
 
-const handleRoleReaction = function(reaction, user, add) {
-	if (user.id == global.client.discord_client.user.id) return;
+const handleRoleReaction = function(client, reaction, user, add) {
+	if (user.id == client.discord_client.user.id) return;
 
 	const emoji = reaction._emoji.name;
 	const roleName = emojis[emoji];
@@ -53,7 +53,7 @@ module.exports = bod.Feature({
 			const reactions = [];
 			let emojiText = "Add a reaction to claim a role.\n\n";
 			for (const emojiName in emojis) {
-				const emoji = getEmoji(emojiName);
+				const emoji = getEmoji(client, emojiName);
 				reactions.push(emoji);
 
 				const role = emojis[emojiName];
@@ -74,13 +74,13 @@ module.exports = bod.Feature({
 
 			client.discord_client.on("messageReactionAdd", function(reaction, user) {
 				if (reaction.message.channel == readmeChannel) {
-					handleRoleReaction(reaction, user, true);
+					handleRoleReaction(client, reaction, user, true);
 				}
 			});
 
 			client.discord_client.on("messageReactionRemove", function(reaction, user) {
 				if (reaction.message.channel == readmeChannel) {
-					handleRoleReaction(reaction, user, false);
+					handleRoleReaction(client, reaction, user, false);
 				}
 			});
 		})();
