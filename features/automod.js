@@ -2,7 +2,8 @@ const bod = require("../discord-bod");
 const punishments = require("../misc-modules/punishments.js");
 
 async function containsAdvertisement(text) {
-	return text.includes("discord.gg/");
+	return text.includes("discord.gg/") ||
+    text.includes("dsc.gg/");
 }
 
 module.exports = bod.Feature({

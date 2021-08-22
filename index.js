@@ -21,3 +21,15 @@ global.client.registry
 console.log("Created registry.");
 
 global.client.login(process.env.DISCORD_TOKEN);
+
+/// Online 24/7
+
+const expressApp = require("express")();
+
+expressApp.get("/", (req, res) => {
+  res.send("Ping!");
+});
+
+expressApp.listen(8000, async () => {
+  console.log("Webserver is running!");
+});

@@ -1,6 +1,17 @@
 const bod = require("../discord-bod");
 const utils = require("../utils.js");
 
+const emojis = {
+  "🖥️": "Programmer",
+  "📜": "Translator",
+  "🎵": "Music Composer",
+  "🎮": "Beta Tester",
+  "🖌️": "Artist",
+  "🏃": "Animator",
+  "💬": "Story Writer",
+  "🎲": "Game Designer"
+};
+
 const getEmoji = function(client, emojiName) {
 	let emoji = client.discord_client.emojis.cache.find(function(emoji) {
 		return emoji.name == emojiName;
@@ -39,17 +50,6 @@ module.exports = bod.Feature({
 
 		// Roles
 		await (async function() {
-			const emojis = {
-				"🖥️": "Programmer",
-				"📜": "Translator",
-				"🎵": "Music Composer",
-				"🎮": "Beta Tester",
-				"🖌️": "Artist",
-				"🏃": "Animator",
-				"💬": "Story Writer",
-				"🎲": "Game Designer"
-			};
-
 			const reactions = [];
 			let emojiText = "Add a reaction to claim a role.\n\n";
 			for (const emojiName in emojis) {
@@ -122,7 +122,7 @@ module.exports = bod.Feature({
 
 			const text = `
 **Permanent invite link:**
-https://discord.gg/m53mPndJF3
+https://dsc.gg/acing-development
 
 **How to get <@&834795976107360306> and <@&834796220954181692> roles:**
 For the YouTuber role you need:
