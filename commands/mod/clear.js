@@ -1,16 +1,16 @@
 const bod = require("../../discord-bod");
 
 module.exports = bod.Command({
-    aliases: ["clear", "clr", "cc", "clearchannel"],
+  aliases: ["clear", "clr", "cc", "clearchannel"],
 	name: "clear",
-    maxArgs: 0,
+  maxArgs: 0,
 	syntax: "clear",
 	description: "Clears all messages in a text channel.",
-    userPermissions: ["ADMINISTRATOR"],
+  userPermissions: ["ADMINISTRATOR"],
 
-    async run(client, message, args) {
-        message.channel.messages.fetch().then(function(results) {
-            message.channel.bulkDelete(results);
-        });
-    }
+  async run(client, message, args) {
+    message.channel.messages.fetch().then(function(results) {
+      message.channel.bulkDelete(results);
+    });
+  }
 });

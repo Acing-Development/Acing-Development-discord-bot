@@ -18,7 +18,16 @@ const questions = [
 	"Is your game 2D or 3D?",
   "Which programming language(s) do you use?",
   "Why did you choose for the game engine you're using?",
-  "What's a must have for every game developer?"
+  "What's a must have tool for every game developer?",
+  "Have you ever participated in a game jam?",
+  "Are you satisfied with the game engine you're using?",
+  "What's the best advice you could give to a fellow game developer?",
+  "What's the best advice you ever got from a fellow game developer?",
+  "What's your game about?",
+  "Does your game have axolotls in it? Axolotls are great, they should be in every game.",
+  "If there was only time to improve one single aspect of your game, what would it be?",
+  "Which is more important, good art or good music?",
+  "How much will your game cost?"
 ];
 
 async function newQuestion(channel) {

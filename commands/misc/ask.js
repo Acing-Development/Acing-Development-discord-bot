@@ -16,26 +16,37 @@ const replies = [
     "that is%{PossibleNot} to be answered in%{RandNum} hours.",
     "you should already know the answer is%{RandNum}.",
     "maybe%{PossibleNot}.",
-    "I%{PossibleDont} think it's%{PossibleNot}%{TrueFalse}."
+    "I%{PossibleDont} think it's%{PossibleNot}%{TrueFalse}.",
+    "I will%{PossibleNot} floccinaucinihilipilificate that question.",
+    "%{PossibleNot}yes.",
+    "%{PossibleNot}no.",
+    "%{PossibleNot}dihydrogen monoxide.",
+    "I%{PossibleDont} know."
 ];
 
 function formatReply(message) {
-    return message
+    message = message
         .replace("%{RandNum}", " " + Math.floor(Math.random() * 1000000 - 500000))
-        .replace("%{TrueFalse}", utils.chance_50_50() ? " true" : " false")
-        .replace("%{PossibleNot}", utils.chance_50_50() ? " not" : "")
-        .replace("%{PossibleDont}", utils.chance_50_50() ? " don't" : "")
+        .replace("%{TrueFalse}", utils.chance_50_50() ? " true " : " false ")
+        .replace("%{PossibleNot}", utils.chance_50_50() ? " not " : "")
+        .replace("%{PossibleDont}", utils.chance_50_50() ? " don't " : "")
     ;
+
+    while (message.includes("  ")) {
+      message = message.replace("  ", " ");
+    }
+    
+    return message;
 }
 
 module.exports = bod.Command({
-    aliases: ["ask"],
+  aliases: ["ask"],
 	name: "ask",
-    minArgs: 1,
+  minArgs: 1,
 	syntax: "ask [question]",
 	description: "Ask a question and get a random answer.",
 
-    async run(client, message, args) {
-        message.channel.send("<@" + message.author.id + ">, " + formatReply(replies[Math.floor(Math.random() * replies.length)]));
-    }
+  async run(client, message, args) {
+    message.channel.send("<@" + message.author.id + ">, " + formatReply(replies[Math.floor(Math.random() * replies.length)]));
+  }
 });
