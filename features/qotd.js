@@ -15,7 +15,10 @@ const questions = [
 	"What platform(s) will you release your game on?",
 	"What motivates you to develop games?",
 	"How's your game coming along?",
-	"Is your game 2D or 3D?"
+	"Is your game 2D or 3D?",
+  "Which programming language(s) do you use?",
+  "Why did you choose for the game engine you're using?",
+  "What's a must have for every game developer?"
 ];
 
 async function newQuestion(channel) {
